@@ -1,28 +1,32 @@
-name: Cypress Tests
+name: CI
 
 on:
   push:
     branches:
-      - main # ajuste conforme o nome da sua branch principal
+      - main  # ajuste conforme o nome da sua branch principal
+  pull_request:
+    branches:
+      - main  # ajuste conforme o nome da sua branch principal
 
-      jobs:
-        tests:
-          runs-on: ubuntu-latest
+jobs:
+  tests:
+    runs-on: ubuntu-latest
 
-          steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with: 
-                node-version: 14
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
 
-            - name: Install Dependencies
-              run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-            - name: Install Cypress
-              run: npm cypress --save-dev
+      - name: Install Cypress
+        run: npm install cypress --save-dev  # Corrigido para instalar o Cypress corretamente
 
-            - name: Run Cypress Tests
-              run: npm run cypress:run
+      - name: Run Cypress Tests
+        run: npm run cypress:run
+
